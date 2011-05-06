@@ -22,7 +22,7 @@
     </ul>
     <% end %>
 
-    <% 
+    <%
         list = context.method_list
         unless @options.show_all
             list = list.find_all {|m| m.visibility == :public || m.visibility == :protected || m.force_documentation }
@@ -108,7 +108,7 @@
     <% context.methods_by_type.each do |type, visibilities|
         next if visibilities.empty?
         visibilities.each do |visibility, methods|
-            next if methods.empty? 
+            next if methods.empty?
             next unless @options.show_all || visibility == :public || visibility == :protected || methods.any? {|m| m.force_documentation }
             %>
             <div class="sectiontitle"><%= type.capitalize %> <%= visibility.to_s.capitalize %> methods</div>
@@ -135,12 +135,12 @@
                     <% end %>
                 </div>
                 <% end %>
-                <% if method.token_stream %>
+                <% if method.token_stream && @options.open_source %>
                 <% markup = method.markup_code %>
                 <div class="sourcecode">
                     <p class="source-link">
                         Source: <a href="javascript:toggleSource('<%= method.aref %>_source')" id="l_<%= method.aref %>_source">show</a>
-                        <% 
+                        <%
                             if markup =~ /File\s(\S+), line (\d+)/
                                 path = $1
                                 line = $2.to_i

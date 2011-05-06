@@ -12,12 +12,5 @@ require "sdoc/c_parser_fix"
 
 unless defined? SDOC_FIXED_RDOC_OPTIONS
   SDOC_FIXED_RDOC_OPTIONS = 1
-  class RDoc::Options
-    alias_method :rdoc_initialize, :initialize
-  
-    def initialize
-      rdoc_initialize
-      @generator = RDoc::Generator::SHtml
-    end
-  end
+  require "sdoc/options.rb"
 end
